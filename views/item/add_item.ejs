@@ -1,0 +1,38 @@
+<%- include("../layouts/main") %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6"><br><br>
+            <h2>Page Add Item</h2><br>
+
+            <% if (typeof errors != "undefined") { %>
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        <% errors.forEach(error => { %>
+                            <li><%= error.msg %></li>
+                        <% }) %>
+                    </ul>    
+                </div>                  
+            <% } %>
+
+            <form action="/item" method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" id="name">
+                  </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <input type="text" class="form-control" name="category" id="category">
+                </div>
+                <div class="mb-3">
+                    <label for="stock" class="form-label">Stock</label>
+                    <input type="text" class="form-control" name="stock" id="stock">
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                     <input type="text" class="form-control" name="price" id="price">
+                 </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

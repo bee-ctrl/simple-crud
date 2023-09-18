@@ -1,0 +1,5 @@
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - 60px);
+}

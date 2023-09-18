@@ -1,0 +1,46 @@
+<%- include("../layouts/main") %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6"><br><br>
+            <h2>Page Edit Item</h2><br>
+
+            <% if (typeof items !== "undefined" && items !== null) { %>
+                <% if (typeof errors !== "undefined") { %>
+                    <div class="alert alert-danger" role="alert">
+                        <ul>
+                            <% errors.forEach(error => { %>
+                                <li><%= error.msg %></li>
+                            <% }) %>
+                        </ul>    
+                    </div>                  
+                <% } %>
+
+                <form method="post" action="/item?_method=PUT">
+                    <input type="hidden" name="_id" value="<%= items._id %>">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" name="name" id="name" value="<%= items.name %>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <input type="text" class="form-control" name="category" id="category" value="<%= items.category %>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="stock" class="form-label">Stock</label>
+                        <input type="text" class="form-control" name="stock" id="stock" value="<%= items.stock %>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="text" class="form-control" name="price" id="price" value="<%= items.price %>" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            <% } else { %>
+                <!-- Handle the case where items is null or undefined -->
+                <div class="alert alert-danger" role="alert">
+                    The item data is not available.
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>

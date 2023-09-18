@@ -1,0 +1,65 @@
+<%- include("../layouts/main") %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <br><br><br><br>
+            <h2>Simple CRUD Item</h2><br>
+
+            <a href="/item/add" class="btn btn-primary">Add Item</a>
+
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Options</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% let no = 1 %>
+                    <% items.forEach(item => { %>
+                        <tr>
+                            <th scope="row"><%= no++ %></th>
+                            <td><%= item.name %></td>
+                            <td><%= item.category %></td>
+                            <td><%= item.stock %></td>
+                            <td>
+                                <button type="button" class="btn btn-success badge rounded-pill" data-bs-toggle="modal" data-bs-target="#myModal<%= no %>">
+                                    <i class="bi bi-info-circle"></i> Detail
+                                </button>
+                                  <a href="/item/edit/<%= item.name %>" class="btn btn-primary badge rounded-pill">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                  </a>  
+                                <form action="/item?_method=DELETE" method="post" class="d-inline">
+                                    <input type="hidden" name="_id" value="<%= item._id %>">
+                                    <a href="/item/delete/<%= item._id %>" class="btn btn-danger badge rounded-pill" onclick="return confirm('Yakin?')">
+                                      <i class="bi bi-trash3"></i> Delete
+                                    </a>
+                                </form>
+                            </td>
+                          </tr>
+                          <!-- MODALS DETAIL -->
+                          <div class="modal fade" id="myModal<%=no %>" tabindex="-1">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title">Detail item <%= item.name %></h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>Name   :  <%= item.name %></p>
+                                  <p>Category  : <%= item.category %></p>
+                                  <p>Stock  : <%= item.stock %></p>
+                                  <p>Price  : <%= item.price %></p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    <% }) %>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
